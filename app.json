@@ -16,6 +16,14 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.tomhln.monuments",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBQM8KbIsXf3l7nGzxn5kiioJdM8sOXc24"
+        }
+      }
+    },
     "ios": {
       "supportsTablet": true
     },
@@ -24,3 +32,5 @@
     }
   }
 }
+
+

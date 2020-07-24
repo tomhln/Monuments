@@ -1,21 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, StatusBar, View, SafeAreaView } from 'react-native';
+
+// import colors
+import { COLORS } from './assets/colors.js'
+
+// import pages
+import Home from './pages/Home.js';
+import AroundMe from './pages/AroundMe.js';
+import Search from './pages/Search.js';
 
 export default function App() {
+
+  const [page, setPage] = useState('Home');
+  const [loc, setLoc] = useState([]);
+  const [search, setSearch] = useState('')
+
+  function navigatePage(page) {
+    setPage(page);
+  }
+
+  function navigateAroundMe(page, loc) {
+    setLoc(loc);
+    setPage(page);
+  }
+
+  function navigateSearch(page, querySearch) {
+    setSearch(querySearch);
+    setPage(page);
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={COLORS.mainGreen} barStyle="auto" />
+      { page === 'Home' && <Home navigate={navigatePage} navigateAroundMe={navigateAroundMe} navigateSearch={navigateSearch}/> }
+
+      { page === 'AroundMe' && <AroundMe loc={loc} navigate={navigateAroundMe}/> }
+
+      { page === 'Search' && <Search search={search} navigate={navigateSearch}/> }
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
   },
 });
